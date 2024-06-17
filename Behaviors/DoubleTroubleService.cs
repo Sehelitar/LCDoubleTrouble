@@ -52,7 +52,7 @@ internal class DoubleTroubleService : NetworkBehaviour
         const double threshold = 0.5d;
         var luck = UnityEngine.Random.Range(0f, 1f);
         var winner = luck >= threshold;
-        var terminal = FindObjectOfType<Terminal>();
+        var terminal = GetComponent<Terminal>();
         var isOverall = Plugin.GameConfig.DoubleTroubleOverall.Value;
         var before = terminal.groupCredits;
         
