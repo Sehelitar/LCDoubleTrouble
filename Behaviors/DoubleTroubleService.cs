@@ -12,7 +12,7 @@ internal class DoubleTroubleService : NetworkBehaviour
     public bool IsActive { get; private set; } = false;
     public bool IsOverall { get; private set; } = true;
     public bool ProbabilityOverride { get; set; } = false;
-    public int SoldAmount { get; set; } = 0;
+    public int SoldAmount { get; internal set; } = 0;
 
     public static DoubleTroubleService Instance { get; private set; } = null;
     
@@ -23,13 +23,13 @@ internal class DoubleTroubleService : NetworkBehaviour
 
     internal void BeginEvent()
     {
-        // On tente le Quitte ou Double
+        // Launch a Double Trouble event only when all conditions are met
         if (!IsServer ||
             !Plugin.GameConfig.DoubleTroubleEnable.Value ||
             RoundManager.Instance.currentLevel.planetHasTime ||
             (!ProbabilityOverride && !ShouldLaunchEvent())) return;
         
-        // QUITTE OU DOUBLE !!!
+        // DOUBLE TROUBLE !!!
         IsActive = true;
         IsOverall = Plugin.GameConfig.DoubleTroubleOverall.Value;
         ProbabilityOverride = false;
@@ -49,7 +49,7 @@ internal class DoubleTroubleService : NetworkBehaviour
         if (!IsServer || !IsActive) return;
         IsActive = false;
 
-        var threshold = 0.5d;
+        const double threshold = 0.5d;
         var luck = UnityEngine.Random.Range(0f, 1f);
         var winner = luck >= threshold;
         var terminal = FindObjectOfType<Terminal>();

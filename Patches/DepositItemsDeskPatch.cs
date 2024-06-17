@@ -1,3 +1,4 @@
+using DoubleTrouble.Behaviors;
 using HarmonyLib;
 
 namespace DoubleTrouble.Patches;
@@ -9,6 +10,7 @@ public class DepositItemsDeskPatch
     [HarmonyPostfix]
     private static void SellAndDisplayItemProfits(int profit)
     {
-        Behaviors.DoubleTroubleService.Instance.SoldAmount += profit;
+        if(DoubleTroubleService.Instance?.IsActive == true)
+            DoubleTroubleService.Instance.SoldAmount += profit;
     }
 }

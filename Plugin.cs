@@ -20,7 +20,6 @@ public class Plugin : BaseUnityPlugin
     private void Awake()
     {
         Log = Logger;
-        //CultureInfo.CurrentCulture = CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("");
 
         // Plugin startup logic
         Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
